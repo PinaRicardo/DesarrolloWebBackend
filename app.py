@@ -5,6 +5,6 @@ from flask import Flask, render_template
 app = Flask(__name__)
 #############################################################
 
-@app.route('/')
+@app.route('/prueba')
 def home():
-    return render_template('index.html')
+    return ("A01746551 Prueba")
