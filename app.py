@@ -17,7 +17,7 @@ def home():
         email = session["email"]
         return render_template('index.html', data=email)
     else:
-        return render_template('Login.html', data=email)
+        return render_template('login.html', data=email)
 
 @app.route('/pruebacodigo')
 def pruebacodigo():
@@ -41,7 +41,7 @@ def login():
         return render_template('index.html', data=session["email"])
     else:
         if (request.method == "GET"):
-            return render_template("Login.html", data="email")
+            return render_template("login.html", data="email")
         else:
             email = request.form["email"]
             password = request.form["password"]
