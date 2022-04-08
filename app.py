@@ -15,7 +15,7 @@ def home():
 @app.route('/login', methods=["GET","POST"])
 def login():
     if (request.methods == "GET"):
-        return render_template("Login.html", error=email)
+        return render_template("login.html", error=email)
     else:
         email=request.form["email"]
         password=request.form["password"]
