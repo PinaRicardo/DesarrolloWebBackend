@@ -7,7 +7,7 @@ app = Flask(__name__)
 #############################################################
 
 @app.route('/pruebacodigo')
-def prueba():
+def pruebacodigo():
    return (" nombres=[]     nombres.append(nombre:ruben,   Semestre01:[{       matematicas: 10,        español10    }]    Semestre02:[{        matematicas: 10,        español:10   }]    })")
 @app.route('/')
 def home():
