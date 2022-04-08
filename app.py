@@ -1,5 +1,6 @@
-from crypt import methods
-from flask import Flask, render_template, request, session
+import email
+from flask import Flask, redirect, render_template, request, session, url_for
+import datetime
 
 
 # FlASK
@@ -22,9 +23,7 @@ def home():
 @app.route('/pruebacodigo')
 def pruebacodigo():
    return (" nombres=[]     nombres.append(nombre:ruben,   Semestre01:[{       matematicas: 10,        español10    }]    Semestre02:[{        matematicas: 10,        español:10   }]    })")
-import email
-from flask import Flask, redirect, render_template, request, session, url_for
-import datetime
+
 
 @app.route('/signup')
 def signup():
