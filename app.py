@@ -46,6 +46,12 @@ def login():
             password = request.form["password"]
             session["email"] = email
             return render_template("index.html", data=email)
+            
+@app.route('/logout')
+def logout():
+    if "email" in session:
+        session.clear()
+        return redirect(url_for("home"))
 
 @app.route('/prueba')
 def prueba():
