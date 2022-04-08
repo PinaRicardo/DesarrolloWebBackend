@@ -1,0 +1,10 @@
+(% for i in data %)
+<i>{{i.nombre}}</i>
+(% for i in i.Semestre01 %)
+<p>Matematicas : {{i.matematicas}}</p>
+<p>Español : {{i.español}}</p>
+(% for i in i.Semestre02 %)
+<p>Matematicas : {{i.matematicas}}</p>
+<p>Español : {{i.español}}</p>
+(% endfor %)
+(% endfor %)
