@@ -1,8 +1,8 @@
-import email
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, url_for, request, render_template, session
 import datetime
 import pymongo
-from decouple import config
+from twilio.rest import Client
+from decouple import 
 
 
 
@@ -24,17 +24,10 @@ cuentas = db.alumno
 
 # Twilio
 #############################################################
-account_sid = ""
-auth_token = ""
+account_sid = config('account_sid')
+auth_token = config('auth_token')
 TwilioClient = Client(account_sid, auth_token)
 #############################################################
-comogusten = TwilioClient.messages.create(
-            from_="whatsapp:+14155238886",
-            body="El usuario %s se agregó a tu pagina web" % (
-                request.form["nombre"]),
-            to="whatsapp:+5215514200581"
-        )
-        print(comogusten.sid)
 
 
 @app.route('/')
