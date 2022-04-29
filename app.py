@@ -91,19 +91,26 @@ def usuarios():
         users.append(doc)
     return render_template("usuarios.html", data=users)
 
-@app.route("/insert")
+@app.route("/insert", methods=["POST"])
 def insertUsers():
-    user={
-        "matricula":"1",
-        "nombre":"Ruben Raya",
-        "correo":"rraya@tec.mx",
-        "contraseña":"1234"
+    user = {
+        "matricula": request.form["matricula"],
+        "nombre": request.form["nombre"],
+        "correo": request.form["correo"],
+        "contrasena": request.form["contrasena"],
     }
     try:
         cuentas.insert_one(user)
+        comogusten = TwilioClient.messages.create(
+            from_="whatsapp:+5255543366622",
+            body="El usuario %s se agregó a tu pagina web" % (
+                request.form["nombre"]),
+            to="whatsapp:+5255543366622"
+        )
+        print(comogusten.sid)
         return redirect(url_for("usuarios"))
     except Exception as e:
-        return "<p>El servicio no esta disponible =>: %s %s"% type(e),e
+        return "<p>El servicio no esta disponible =>: %s %s" % type(e), e
 
 @app.route("/delete_one/<matricula>")
 def delete_one(matricula):
@@ -132,3 +139,28 @@ def update():
 @app.route('/create')
 def create():
     return render_template('Create.html')
+
+@app.route("/find_one/<matricula>")
+def find_one(matricula):
+    try:
+        user = cuentas.find_one({"matricula": (matricula)})
+        if user == None:
+            return "<p>La matricula %s nó existe</p>" % (matricula)
+        else:
+            return "<p>Encontramos: %s </p>" % (user)
+    except Exception as e:
+        return "%s" % 
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    email = ""
+    if 'email' in session:
+        return render_template('index.html', error=email)
+    else:
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        session['email'] = email
+        session['password'] = password
+        session['name'] = name
+    return render_template('index.html', error=email)
